@@ -2,6 +2,8 @@ package ge.edu.freeuni.sdp.iot.simulators.house.core;
 
 import ge.edu.freeuni.sdp.iot.simulators.house.model.House;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,6 +14,13 @@ public class InMemoryRepository implements Repository {
 
     public InMemoryRepository(Map<String, House> gardenMap) {
         this.gardenMap = gardenMap;
+    }
+
+    @Override
+    public synchronized Iterable<House> getAllHouses() {
+        List<House> houses = new ArrayList<>();
+        houses.addAll(gardenMap.values());
+        return houses;
     }
 
     @Override

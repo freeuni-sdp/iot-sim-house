@@ -1,6 +1,8 @@
 package ge.edu.freeuni.sdp.iot.simulators.house.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,5 +35,11 @@ public class House {
             return floorMap.get(floorId);
 
         return null;
+    }
+
+    public Iterable<Floor> getAllFloors() {
+        List<Floor> floorList = new ArrayList<>();
+        floorList.addAll(floorMap.values());
+        return floorList;
     }
 }
