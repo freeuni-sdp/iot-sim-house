@@ -2,7 +2,7 @@ package ge.edu.freeuni.sdp.iot.simulators.house.services;
 
 import ge.edu.freeuni.sdp.iot.simulators.house.core.Repository;
 import ge.edu.freeuni.sdp.iot.simulators.house.core.RepositoryFactory;
-import ge.edu.freeuni.sdp.iot.simulators.house.model.SwitchOnRequest;
+import ge.edu.freeuni.sdp.iot.simulators.house.model.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -20,17 +20,39 @@ public class HeatingSwitchService {
     }
 
     @GET
-    @Path("heating")
-    public Response getAllSwitches() {
-        /* TODO: heating */
-        return Response.ok().build();
+    @Path("house/{house_id}/heating")
+    public HouseHeatingSwitches getAllSwitches(@PathParam("house_id") String houseId) {
+        Repository repository = getRepository();
+
+        House house = repository.findHouse(houseId);
+        if (house == null)
+            throw new NotFoundException();
+
+        HouseHeatingSwitches res = new HouseHeatingSwitches(houseId);
+
+        for (Floor f : house.getFloors()) {
+            res.add(f.getHeatingSwitch());
+        }
+
+        return res;
     }
 
     @GET
-    @Path("heating/{floor_id}")
-    public Response getSwitchStatus(@PathParam("floor_id") String floorId) {
-        /* TODO: heating on floor */
-        return Response.ok().build();
+    @Path("/house/{house_id}/floor/{floor_id}/heating")
+    public HeatingSwitch getSwitchStatus(@PathParam("house_id") String houseId,
+                                         @PathParam("floor_id") String floorId) {
+        Repository repository = getRepository();
+
+        House house = repository.findHouse(houseId);
+        if (house == null)
+            throw new NotFoundException();
+
+        Floor floor = house.getFloor(floorId);
+
+        if (floor == null)
+            throw new NotFoundException();
+
+        return floor.getHeatingSwitch();
     }
 
     @PUT

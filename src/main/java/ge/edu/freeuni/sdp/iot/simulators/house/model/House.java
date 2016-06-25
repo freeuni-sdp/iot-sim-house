@@ -1,5 +1,6 @@
 package ge.edu.freeuni.sdp.iot.simulators.house.model;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,4 +35,9 @@ public class House {
 
         return null;
     }
+
+    public Collection<Floor> getFloors() {
+        return floorMap.values();
+    }
+
 }
