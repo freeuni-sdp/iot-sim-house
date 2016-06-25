@@ -13,7 +13,7 @@ import java.util.Map;
 public class HouseHeatingSwitches {
 
     @XmlElement
-    private Map<String, HeatingSwitch> switches;
+    private Map<String, HeatingSwitchMessage> switches;
 
     @XmlElement
     private String houseId;
@@ -27,15 +27,15 @@ public class HouseHeatingSwitches {
         return houseId;
     }
 
-    public void add(HeatingSwitch s) {
+    public void add(HeatingSwitchMessage s) {
         switches.put(s.getId(), s);
     }
 
-    public HeatingSwitch get(String floorId) {
+    public HeatingSwitchMessage get(String floorId) {
         return switches.get(floorId);
     }
 
-    public Collection<HeatingSwitch> getValues() {
+    public Collection<HeatingSwitchMessage> getValues() {
         return switches.values();
     }
 

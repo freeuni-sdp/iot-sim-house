@@ -1,47 +1,30 @@
 package ge.edu.freeuni.sdp.iot.simulators.house.model;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  * Created by nika on 6/25/16.
  */
-@XmlRootElement
 public class HeatingSwitch {
 
-    @XmlElement
-    private String id;
+    private long turnOnTime;
 
-    @XmlElement
-    private boolean status;
+    private int onDuration;
 
-    @XmlElement
-    private boolean available;
-
-    public HeatingSwitch(String id, boolean status) {
-        this.id = id;
-        this.status = status;
-        this.available = true;
+    public HeatingSwitch() {
+        this.turnOnTime = 0;
+        this.onDuration = 0;
     }
 
-    public String getId() {
-        return id;
+    public synchronized void turnOn(int duration) {
+        this.turnOnTime = System.currentTimeMillis();
+        this.onDuration = duration;
     }
 
-    public boolean getStatus() {
-        return status;
+    public synchronized void turnOff() {
+        this.onDuration = 0;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
-    public boolean isAvailable() {
-        return this.available;
-    }
-
-    public void setAvailable(boolean value) {
-        this.available = value;
+    public synchronized boolean isOn() {
+        return (System.currentTimeMillis() - turnOnTime) < onDuration;
     }
 
 }

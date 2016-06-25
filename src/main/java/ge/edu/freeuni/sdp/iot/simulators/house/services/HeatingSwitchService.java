@@ -31,7 +31,8 @@ public class HeatingSwitchService {
         HouseHeatingSwitches res = new HouseHeatingSwitches(houseId);
 
         for (Floor f : house.getFloors()) {
-            res.add(f.getHeatingSwitch());
+            HeatingSwitch heatingSwitch = f.getHeatingSwitch();
+            res.add(new HeatingSwitchMessage(f.getFloorId(), heatingSwitch.isOn()));
         }
 
         return res;
@@ -39,8 +40,8 @@ public class HeatingSwitchService {
 
     @GET
     @Path("/house/{house_id}/floor/{floor_id}/heating")
-    public HeatingSwitch getSwitchStatus(@PathParam("house_id") String houseId,
-                                         @PathParam("floor_id") String floorId) {
+    public HeatingSwitchMessage getSwitchStatus(@PathParam("house_id") String houseId,
+                                                @PathParam("floor_id") String floorId) {
         Repository repository = getRepository();
 
         House house = repository.findHouse(houseId);
@@ -52,21 +53,47 @@ public class HeatingSwitchService {
         if (floor == null)
             throw new NotFoundException();
 
-        return floor.getHeatingSwitch();
+        HeatingSwitch heatingSwitch = floor.getHeatingSwitch();
+        return new HeatingSwitchMessage(floorId, heatingSwitch.isOn());
     }
 
     @PUT
-    @Path("heating/{floor_id}")
+    @Path("/house/{house_id}/floor/{floor_id}/heating")
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response switchOn(@PathParam("floor_id") String floorId, SwitchOnRequest request) {
-        /* TODO: turn on heating on floor */
+    public Response switchOn(@PathParam("house_id") String houseId,
+                             @PathParam("floor_id") String floorId,
+                             SwitchOnRequest request) {
+        Repository repository = getRepository();
+
+        House house = repository.findHouse(houseId);
+        if (house == null)
+            throw new NotFoundException();
+
+        Floor floor = house.getFloor(floorId);
+        if (floor == null)
+            throw new NotFoundException();
+
+        floor.getHeatingSwitch().turnOn(request.getPeriod());
+
         return Response.ok().build();
     }
 
     @DELETE
-    @Path("heating/{floor_id}")
-    public Response switchOff(@PathParam("floor_id") String floorId) {
-        /* TODO: turn off heating on floor */
+    @Path("/house/{house_id}/floor/{floor_id}/heating")
+    public Response switchOff(@PathParam("house_id") String houseId,
+                              @PathParam("floor_id") String floorId) {
+        Repository repository = getRepository();
+
+        House house = repository.findHouse(houseId);
+        if (house == null)
+            throw new NotFoundException();
+
+        Floor floor = house.getFloor(floorId);
+        if (floor == null)
+            throw new NotFoundException();
+
+        floor.getHeatingSwitch().turnOff();
+
         return Response.ok().build();
     }
 
