@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="iot-sim-house:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="iot-house-simulator.war">
+      <element id="artifact" artifact-name="iot-sim-house:war exploded" />
+    </root>
+  </artifact>
+</component>
