@@ -15,14 +15,14 @@ public class InMemoryRepository implements Repository {
     }
 
     @Override
-    public House findHouse(String houseId) {
+    public synchronized House findHouse(String houseId) {
         if (gardenMap.containsKey(houseId))
             return gardenMap.get(houseId);
         return null;
     }
 
     @Override
-    public void updateHouse(House house) {
+    public synchronized void updateHouse(House house) {
         gardenMap.put(house.getHouseId(), house);
     }
 

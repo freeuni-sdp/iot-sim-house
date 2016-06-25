@@ -39,8 +39,21 @@ public class RepositoryFactory {
     }
 
     private static House initNewHouse(HouseData house) {
-        //TODO INIT HOUSE
-        return new House(house.getHouseId());
+        Map<String, Floor> floorMap = new HashMap<>();
+        //all houses have 5 floors with id "1" to "5";
+        int numFloors = 5;
+        for (int i=0; i<numFloors; i++) {
+            String floorId = String.valueOf(i + 1);
+            Floor floor = initNewFloor(house.getHouseId(), floorId);
+            floorMap.put(floorId, floor);
+        }
+        return new House(house.getHouseId(), floorMap);
+    }
+
+    private static Floor initNewFloor(String houseId, String floorId) {
+        Floor res = new Floor(houseId, floorId);
+        res.setTemperature(25.5);
+        return res;
     }
 
 }
