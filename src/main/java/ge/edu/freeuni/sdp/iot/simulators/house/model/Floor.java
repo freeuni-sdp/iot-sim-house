@@ -12,6 +12,7 @@ public class Floor {
 
     public Floor(String houseId, String floorId) {
         this.houseId = houseId;
+        this.floorId = floorId;
     }
 
     public String getHouseId() {

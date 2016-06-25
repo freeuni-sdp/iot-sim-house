@@ -30,7 +30,7 @@ public class HeatingSwitchService {
 
         HouseHeatingSwitches res = new HouseHeatingSwitches(houseId);
 
-        for (Floor f : house.getFloors()) {
+        for (Floor f : house.getAllFloors()) {
             HeatingSwitch heatingSwitch = f.getHeatingSwitch();
             res.add(new HeatingSwitchMessage(f.getFloorId(), heatingSwitch.isOn()));
         }

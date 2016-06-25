@@ -6,10 +6,8 @@ import ge.edu.freeuni.sdp.iot.simulators.house.model.House;
 import ge.edu.freeuni.sdp.iot.simulators.house.model.TemperatureData;
 
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 /**
  * Created by Nika Doghonadze
@@ -45,17 +43,16 @@ public class TemperatureInfoSender extends Thread {
     }
 
     private void sendTemperatureData(TemperatureData temperatureData) {
-        //TODO send to shadow
         String url = getUrl(temperatureData);
         client.target(url)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(temperatureData, MediaType.APPLICATION_JSON_TYPE));
+                .post(Entity.json(temperatureData.toString()));
     }
 
     private String getUrl(TemperatureData temperatureData) {
         return shadowUri + "/houses/" + temperatureData.getHouseId()
-                + "/floors/" + temperatureData.getFloorId() + "/thermometer";
+                + "/floors/" + temperatureData.getFloorId();
     }
 
     private static void sleep(int secs) {

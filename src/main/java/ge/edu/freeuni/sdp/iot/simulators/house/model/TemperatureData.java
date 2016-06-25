@@ -52,9 +52,9 @@ public class TemperatureData {
     @Override
     public String toString() {
         return "{" +
-                "\"house_id\": \"" + getHouseId() +",\n" +
-                "\"floor_id\": \"" + getFloorId() + "\",\n" +
-                "\"temperature\": "+ getTemperature() +"\n" +
+                "\"house_id\": \"" + getHouseId() +"\"," +
+                "\"floor_id\": \"" + getFloorId() + "\"," +
+                "\"temperature\": "+ getTemperature() +"" +
                 "}";
     }
 }
