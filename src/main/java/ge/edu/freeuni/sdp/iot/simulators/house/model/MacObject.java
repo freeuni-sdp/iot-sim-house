@@ -15,6 +15,12 @@ public class MacObject {
 
         private String id;
 
+        public MacObject(String macAddress,String deviceName, String id){
+            this.deviceMacAddress = macAddress;
+            this.deviceName = deviceName;
+            this.id = id;
+        }
+
         public String getId() {
             return id;
         }
@@ -47,4 +53,10 @@ public class MacObject {
         public String toString() {
             return "{\"deviceName\":" + quot(deviceName) + ", \"deviceMacAddress\":" + quot(deviceMacAddress) + ", \"mac_id\":" + quot(id) + "}";
         }
+
+        public String toStringWithoutID() {
+            return "{\"deviceName\":" + quot(deviceName) + ", \"deviceMacAddress\":" + quot(deviceMacAddress)  + "}";
+        }
+
+
 }

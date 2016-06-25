@@ -1,5 +1,6 @@
 package ge.edu.freeuni.sdp.iot.simulators.house.core;
 
+import ge.edu.freeuni.sdp.iot.simulators.house.worker.MacSimulatorWorker;
 import ge.edu.freeuni.sdp.iot.simulators.house.worker.TemperatureInfoSender;
 
 import javax.servlet.ServletContextEvent;
@@ -13,11 +14,13 @@ import javax.ws.rs.client.ClientBuilder;
 @WebListener
 public class ContextListener  implements ServletContextListener {
     private static String url = "https://iot-room-thermometer.herokuapp.com/webapi";
+    private static String macUrl = "https://iot-router.herokuapp.com/webapi";
     private static int UPDATE_INTERVAL = 10;
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         new TemperatureInfoSender(url, UPDATE_INTERVAL, ClientBuilder.newClient()).start();
+        new MacSimulatorWorker(macUrl,60,ClientBuilder.newClient()).start();
     }
 
     @Override

@@ -10,15 +10,18 @@ import java.util.Map;
 public class House {
     private String houseId;
     private Map<String, Floor> floorMap;
+    private Map<String, MacObject> macMap;
 
     public House(String houseId) {
         this.houseId = houseId;
         floorMap = new HashMap<>();
+        macMap = new HashMap<>();
     }
 
     public House(String houseId, Map<String, Floor> floorMap) {
         this.houseId = houseId;
         this.floorMap = floorMap;
+        macMap = new HashMap<>();
     }
 
     public String getHouseId() {
@@ -35,6 +38,8 @@ public class House {
 
         return null;
     }
+
+
 
     public Iterable<Floor> getAllFloors() {
         return new ArrayList<>(floorMap.values());
