@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response;
 /**
  * Created by nika on 6/25/16.
  */
+@Path("/house/{house_id}")
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_JSON})
 public class HeatingSwitchService {
@@ -20,7 +21,7 @@ public class HeatingSwitchService {
     }
 
     @GET
-    @Path("house/{house_id}/heating")
+    @Path("/heating")
     public HouseHeatingSwitches getAllSwitches(@PathParam("house_id") String houseId) {
         Repository repository = getRepository();
 
@@ -39,7 +40,7 @@ public class HeatingSwitchService {
     }
 
     @GET
-    @Path("/house/{house_id}/floor/{floor_id}/heating")
+    @Path("/floor/{floor_id}/heating")
     public HeatingSwitchMessage getSwitchStatus(@PathParam("house_id") String houseId,
                                                 @PathParam("floor_id") String floorId) {
         Repository repository = getRepository();
@@ -58,7 +59,7 @@ public class HeatingSwitchService {
     }
 
     @PUT
-    @Path("/house/{house_id}/floor/{floor_id}/heating")
+    @Path("/floor/{floor_id}/heating")
     @Consumes({MediaType.APPLICATION_JSON})
     public Response switchOn(@PathParam("house_id") String houseId,
                              @PathParam("floor_id") String floorId,
@@ -79,7 +80,7 @@ public class HeatingSwitchService {
     }
 
     @DELETE
-    @Path("/house/{house_id}/floor/{floor_id}/heating")
+    @Path("/floor/{floor_id}/heating")
     public Response switchOff(@PathParam("house_id") String houseId,
                               @PathParam("floor_id") String floorId) {
         Repository repository = getRepository();
