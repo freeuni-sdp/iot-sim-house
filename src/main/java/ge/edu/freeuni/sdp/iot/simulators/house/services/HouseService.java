@@ -14,10 +14,10 @@ import javax.ws.rs.core.Response;
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_JSON})
 public class HouseService {
+
     protected Repository getRepository() {
         return RepositoryFactory.inMemoryRepositoryInstance();
     }
-
 
     @GET
     @Path("/{house_id}/floors/temperature")

@@ -7,6 +7,7 @@ public class Floor {
     private String houseId;
     private String floorId;
     private double temperature;
+    private HeatingSwitch heatingSwitch;
 
 
     public Floor(String houseId, String floorId) {
@@ -31,6 +32,14 @@ public class Floor {
 
     public double getTemperature() {
         return temperature;
+    }
+
+    public HeatingSwitch getHeatingSwitch() {
+        return heatingSwitch;
+    }
+
+    public void setHeatingSwitch(HeatingSwitch heatingSwitch) {
+        this.heatingSwitch = heatingSwitch;
     }
 
     public void setTemperature(double temperature) {

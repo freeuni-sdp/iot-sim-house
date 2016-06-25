@@ -1,8 +1,6 @@
 package ge.edu.freeuni.sdp.iot.simulators.house.core;
 
-import ge.edu.freeuni.sdp.iot.simulators.house.model.Floor;
-import ge.edu.freeuni.sdp.iot.simulators.house.model.House;
-import ge.edu.freeuni.sdp.iot.simulators.house.model.HouseData;
+import ge.edu.freeuni.sdp.iot.simulators.house.model.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +43,7 @@ public class RepositoryFactory {
         for (int i=0; i<numFloors; i++) {
             String floorId = String.valueOf(i + 1);
             Floor floor = initNewFloor(house.getHouseId(), floorId);
+            floor.setHeatingSwitch(new HeatingSwitch());
             floorMap.put(floorId, floor);
         }
         return new House(house.getHouseId(), floorMap);
