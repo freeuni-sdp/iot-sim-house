@@ -1,4 +1,4 @@
-package ge.edu.freeuni.sdp.iot.simulators.house;
+package ge.edu.freeuni.sdp.iot.simulators.house.services;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;

@@ -1,5 +1,6 @@
 package ge.edu.freeuni.sdp.iot.simulators.house;
 
+import ge.edu.freeuni.sdp.iot.simulators.house.services.Ping;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
