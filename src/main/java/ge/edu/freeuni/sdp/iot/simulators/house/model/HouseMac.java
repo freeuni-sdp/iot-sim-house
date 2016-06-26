@@ -8,18 +8,30 @@ import java.util.Map;
  * Created by Koko on 25.06.2016.
  */
 public class HouseMac {
-    @XmlElement
     private Map<String, MacObject> macs;
 
     public HouseMac() {
         macs = new HashMap<>();
     }
 
-    public void add(MacObject m_obj) {
-        macs.put(m_obj.getId(), m_obj);
+    public void add(MacObject macObject) {
+        macs.put(macObject.getId(), macObject);
     }
 
-    public MacObject get(String mac_Id) {
-        return macs.get(mac_Id);
+    public MacObject get(String macId) {
+        return macs.get(macId);
+    }
+
+    public void delete(String macID) {
+        macs.remove(macID);
+    }
+
+
+    public boolean isEmpty() {
+        return macs.isEmpty();
+    }
+
+    public String[] getIds() {
+        return (String[]) macs.keySet().toArray();
     }
 }

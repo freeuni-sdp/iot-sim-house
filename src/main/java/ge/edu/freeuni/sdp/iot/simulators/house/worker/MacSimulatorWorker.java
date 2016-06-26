@@ -59,7 +59,26 @@ public class MacSimulatorWorker extends Thread {
                     }
                     houseMac.add(m_obj);
                 } else {
-
+                    HouseMac houseMac;
+                    if (!houseMacMap.containsKey(house.getHouseId())) {
+                        houseMac = new HouseMac();
+                        houseMacMap.put(house.getHouseId(), houseMac);
+                    } else {
+                        houseMac = houseMacMap.get(house.getHouseId());
+                    }
+                    if (!houseMac.isEmpty()) {
+                        Random generator = new Random();
+                        String[] keys = houseMac.getIds();
+                        String randomValue = keys[generator.nextInt(keys.length)];
+                        String url = getUrl(house.getHouseId());
+                        Response res = client.target(url  + "/connect/" + randomValue)
+                                .request(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .delete();
+                        if (res.getStatus() == 200) {
+                            houseMac.delete(randomValue);
+                        }
+                    }
                 }
             }
         }
