@@ -10,7 +10,9 @@ import java.util.Map;
  * Created by Nika Doghonadze
  */
 public class RepositoryFactory {
+
     private static Repository instance;
+    private static SwitchThread switchThread;
 
     public static synchronized Repository inMemoryRepositoryInstance() {
         if (instance == null) {
@@ -32,6 +34,9 @@ public class RepositoryFactory {
             House newHouse = initNewHouse(houseData);
             res.put(houseData.getHouseId(), newHouse);
         }
+
+        switchThread = new SwitchThread(100);
+        switchThread.start();
 
         return res;
     }
