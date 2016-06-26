@@ -31,10 +31,10 @@ public class SwitchThread extends Thread {
 
                     if (heatingSwitch.isOn()) {
                         f.setTemperature(f.getTemperature() +
-                                (f.getTemperature() - MAX_TEMPERATURE) * INCREASE_RATE);
+                                (MAX_TEMPERATURE - f.getTemperature()) * INCREASE_RATE);
                     } else {
                         f.setTemperature(f.getTemperature() +
-                                (f.getTemperature() - MIN_TEMPERATURE) * DECREASE_RATE);
+                                (MIN_TEMPERATURE - f.getTemperature()) * DECREASE_RATE);
                     }
 
                 }
