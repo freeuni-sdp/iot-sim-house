@@ -1,13 +1,15 @@
 package ge.edu.freeuni.sdp.iot.simulators.house.model;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by nika on 6/25/16.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SwitchOnRequest {
 
-    @XmlElement
+    @JsonProperty("period")
     private int period;
 
     public SwitchOnRequest(int period) {

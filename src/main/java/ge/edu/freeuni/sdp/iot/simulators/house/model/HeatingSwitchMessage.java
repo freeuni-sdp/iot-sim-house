@@ -1,21 +1,24 @@
 package ge.edu.freeuni.sdp.iot.simulators.house.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Created by nika on 6/25/16.
  */
-@XmlRootElement
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class HeatingSwitchMessage {
 
-    @XmlElement
+    @JsonProperty("id")
     private String id;
 
-    @XmlElement
+    @JsonProperty("status")
     private boolean status;
 
-    @XmlElement
+    @JsonProperty("available")
     private boolean available;
 
     public HeatingSwitchMessage(String id, boolean status) {

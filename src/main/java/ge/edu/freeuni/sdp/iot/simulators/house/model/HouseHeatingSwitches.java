@@ -1,5 +1,8 @@
 package ge.edu.freeuni.sdp.iot.simulators.house.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
@@ -9,13 +12,13 @@ import java.util.Map;
 /**
  * Created by nika on 6/25/16.
  */
-@XmlRootElement
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class HouseHeatingSwitches {
 
-    @XmlElement
+    @JsonProperty("switches")
     private Map<String, HeatingSwitchMessage> switches;
 
-    @XmlElement
+    @JsonProperty("houseId")
     private String houseId;
 
     public HouseHeatingSwitches(String houseId) {
@@ -33,10 +36,6 @@ public class HouseHeatingSwitches {
 
     public HeatingSwitchMessage get(String floorId) {
         return switches.get(floorId);
-    }
-
-    public Collection<HeatingSwitchMessage> getValues() {
-        return switches.values();
     }
 
 }
