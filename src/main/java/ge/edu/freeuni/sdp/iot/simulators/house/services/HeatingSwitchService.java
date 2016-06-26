@@ -3,9 +3,11 @@ package ge.edu.freeuni.sdp.iot.simulators.house.services;
 import ge.edu.freeuni.sdp.iot.simulators.house.core.Repository;
 import ge.edu.freeuni.sdp.iot.simulators.house.core.RepositoryFactory;
 import ge.edu.freeuni.sdp.iot.simulators.house.model.*;
+import org.json.JSONObject;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
 /**
@@ -62,7 +64,7 @@ public class HeatingSwitchService {
     @Consumes({MediaType.APPLICATION_JSON})
     public Response switchOn(@PathParam("house_id") String houseId,
                              @PathParam("floor_id") String floorId,
-                             SwitchOnRequest request) {
+                             String requestStr) {
         Repository repository = getRepository();
 
         House house = repository.findHouse(houseId);
@@ -72,6 +74,8 @@ public class HeatingSwitchService {
         Floor floor = house.getFloor(floorId);
         if (floor == null)
             throw new NotFoundException();
+
+        SwitchOnRequest request = SwitchOnRequest.fromJson(new JSONObject(requestStr));
 
         floor.getHeatingSwitch().turnOn(request.getPeriod());
 

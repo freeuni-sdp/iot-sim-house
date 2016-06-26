@@ -2,6 +2,7 @@ package ge.edu.freeuni.sdp.iot.simulators.house.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.json.JSONObject;
 
 /**
  * Created by nika on 6/25/16.
@@ -20,4 +21,7 @@ public class SwitchOnRequest {
         return period;
     }
 
+    public static SwitchOnRequest fromJson(JSONObject object) {
+        return new SwitchOnRequest(object.getInt("period"));
+    }
 }
