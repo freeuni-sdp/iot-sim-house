@@ -24,7 +24,7 @@ public class HeatingSwitch {
     }
 
     public synchronized boolean isOn() {
-        return (System.currentTimeMillis() - turnOnTime) < onDuration;
+        return (System.currentTimeMillis() - turnOnTime) < onDuration * (long) 1000;
     }
 
 }

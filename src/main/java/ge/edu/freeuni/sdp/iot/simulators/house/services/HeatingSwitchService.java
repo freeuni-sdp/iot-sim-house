@@ -7,13 +7,13 @@ import org.json.JSONObject;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
 /**
  * Created by nika on 6/25/16.
  */
 @Path("/house/{house_id}")
+@Produces({MediaType.APPLICATION_JSON})
 public class HeatingSwitchService {
 
     protected Repository getRepository() {
@@ -22,7 +22,6 @@ public class HeatingSwitchService {
 
     @GET
     @Path("/heating")
-    @Produces({MediaType.APPLICATION_JSON})
     public HouseHeatingSwitches getAllSwitches(@PathParam("house_id") String houseId) {
         Repository repository = getRepository();
 
