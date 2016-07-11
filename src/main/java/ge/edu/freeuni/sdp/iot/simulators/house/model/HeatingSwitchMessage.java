@@ -2,6 +2,7 @@ package ge.edu.freeuni.sdp.iot.simulators.house.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.json.JSONObject;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -45,6 +46,28 @@ public class HeatingSwitchMessage {
 
     public void setAvailable(boolean value) {
         this.available = value;
+    }
+
+    public static HeatingSwitchMessage fromJson(JSONObject object) {
+        HeatingSwitchMessage heatingSwitchMessage = new HeatingSwitchMessage(
+                object.getString("id"),
+                object.getBoolean("status")
+        );
+        heatingSwitchMessage.setAvailable(object.getBoolean("available"));
+        return heatingSwitchMessage;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        HeatingSwitchMessage message = (HeatingSwitchMessage) o;
+
+        if (status != message.status) return false;
+        if (available != message.available) return false;
+        return id != null ? id.equals(message.id) : message.id == null;
+
     }
 
 }

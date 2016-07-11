@@ -52,4 +52,19 @@ public class House {
     public Iterable<Floor> getAllFloors() {
         return new ArrayList<>(floorMap.values());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        House house = (House) o;
+
+        if (houseId != null ? !houseId.equals(house.houseId) : house.houseId != null) return false;
+        if (floorMap != null ? !floorMap.equals(house.floorMap) : house.floorMap != null) return false;
+        if (macMap != null ? !macMap.equals(house.macMap) : house.macMap != null) return false;
+        return conditionerCondition != null ? conditionerCondition.equals(house.conditionerCondition) : house.conditionerCondition == null;
+
+    }
+
 }

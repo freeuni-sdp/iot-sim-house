@@ -46,4 +46,19 @@ public class Floor {
     public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Floor floor = (Floor) o;
+
+        if (Double.compare(floor.temperature, temperature) != 0) return false;
+        if (houseId != null ? !houseId.equals(floor.houseId) : floor.houseId != null) return false;
+        if (floorId != null ? !floorId.equals(floor.floorId) : floor.floorId != null) return false;
+        return heatingSwitch != null ? heatingSwitch.equals(floor.heatingSwitch) : floor.heatingSwitch == null;
+
+    }
+
 }

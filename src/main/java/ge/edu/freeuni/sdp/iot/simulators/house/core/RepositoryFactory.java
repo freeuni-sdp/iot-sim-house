@@ -12,15 +12,31 @@ import java.util.Map;
 public class RepositoryFactory {
 
     private static Repository instance;
+    private static Repository testInstance;
+
     private static SwitchThread switchThread;
+    private static boolean testMode = false;
 
     public static synchronized Repository inMemoryRepositoryInstance() {
+
+        if (testMode) {
+            return testInstance;
+        }
+
         if (instance == null) {
             Map<String, House> initialMap = getInitialHouseMap();
             instance = new InMemoryRepository(initialMap);
         }
 
         return instance;
+    }
+
+    public static void setTestInstance(Repository repository) {
+        testInstance = repository;
+    }
+
+    public static void setTestMode(boolean mode) {
+        testMode = mode;
     }
 
     private static Map<String, House> getInitialHouseMap() {

@@ -27,4 +27,16 @@ public class HeatingSwitch {
         return (System.currentTimeMillis() - turnOnTime) < onDuration * (long) 1000;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        HeatingSwitch that = (HeatingSwitch) o;
+
+        if (turnOnTime != that.turnOnTime) return false;
+        return onDuration == that.onDuration;
+
+    }
+
 }
